@@ -8,8 +8,7 @@ RUN apt update && apt -y install software-properties-common \
     && add-apt-repository ppa:deluge-team/ppa \
     && apt update \
     && apt -y install deluged deluge-web deluge-console
-
-COPY root/ /
+    
 COPY entrypoint.sh /
 
 RUN chmod +x /entrypoint.sh
