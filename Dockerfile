@@ -4,7 +4,7 @@ ARG BUILD_DATE
 ARG VERSION
 LABEL maintainer="github/kurankat"
 
-RUN apt update && apt -y install software-properties-common \
+RUN apt update && apt -y install software-properties-common curl \
     && add-apt-repository ppa:deluge-team/ppa \
     && apt update \
     && apt -y install deluged deluge-web deluge-console
