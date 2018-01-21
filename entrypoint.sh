@@ -1,4 +1,4 @@
 #!/bin/bash
 
-su deluge -c "/usr/bin/deluged"
-su deluge -c "/usr/bin/deluge-web"
+/usr/bin/deluged
+/usr/bin/deluge-web
