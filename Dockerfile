@@ -14,6 +14,6 @@ COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 8112 58846 58946 58946/udp
-VOLUME /root/.config/deluge /root/Downloads
+VOLUME /root/.config/deluge /downloads
 
 ENTRYPOINT ["/entrypoint.sh"]
