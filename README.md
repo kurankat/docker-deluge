@@ -7,12 +7,14 @@ Experimental image. `Deluged` and `deluge-web` run as `root`. Much safer to run 
 
 Download the image with:
 
-```docker pull kurankat/deluge
+```
+docker pull kurankat/deluge
 ```
 
 Run a container with:
 
-```docker run -d --name deluge \
+```
+docker run -d --name deluge \
    -v /Users/MFS/docker/dockerfiles/deluge/vol1:/downloads \
    -v /Users/MFS/docker/dockerfiles/deluge/vol2:/root/.config/deluge \
    -p 8112:8112 \
@@ -33,7 +35,8 @@ Your deluge container will run in a docker-only network and you can choose to bi
 
 `docker-compose.yml`
 
-```version: '3'
+```
+version: '3'
 
 services:
  deluge:
@@ -62,7 +65,8 @@ Make sure you assign IP addresses that are outside the router's DHCP range to av
 
 `docker-compose.yml`
 
-```version: '3'
+```
+version: '3'
 
  services:
   deluge:
@@ -86,3 +90,4 @@ networks:
   ipam:
    config:
     - subnet: 192.168.1.0/24
+```
