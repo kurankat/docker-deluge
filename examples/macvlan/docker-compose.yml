@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+ deluge:
+  container_name: deluge
+  image: kurankat/deluge
+  restart: always
+  volumes:
+   - /srv/media/downloads:/downloads
+   - /srv/deluge/config-vpn:/root/.config/deluge
+  environment:
+   - TZ=Australia/Hobart
+  networks:
+  example.lan:
+   ipv4_address: 192.168.1.25
+
+networks:
+ example.lan:
+  driver: macvlan
+  driver_opts:
+   parent: br0
+  ipam:
+   config:
+    - subnet: 192.168.1.0/24
