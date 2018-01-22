@@ -1,7 +1,7 @@
 # docker-deluge
 Docker container to run [Deluge](http://deluge-torrent.org/) and web client in Ubuntu 16.04
 
-Experimental image. `Deluged` and `deluge-web` run as `root`. Much safer to run behind NAT.
+Experimental image. `deluged` and `deluge-web` run as `root`. Much safer to run behind NAT.
 
 # Installation:
 
@@ -44,8 +44,8 @@ services:
   image: kurankat/deluge
   restart: always
   volumes:
-   - ./downloads:/home/deluge/Downloads
-   - ./config:/home/deluge/.config/deluge
+   - ./downloads:/downloads
+   - ./config:/root/.config/deluge
   environment:
    - TZ=<YOUR TIMEZONE>
   ports:
@@ -58,9 +58,9 @@ Start your container by running `docker-compose up -d`.
 
 ## Placing containers on a LAN (macvlan networking)
 
-Your deluge container will run in a macvlan network, through a pre-configured bridge on the host, and attach directly to the router with its own IP address. The example below assumes that you have
-   a) Pre-configured a bridge in your Docker host, in this example `br0`
-   b) The network you are attaching to is in the 192.168.1.0/24 subnet.
+Your deluge container will run in a macvlan network, through a pre-configured bridge on the host, and attach directly to the router with its own IP address. The example below assumes that you have:
+   - Pre-configured a bridge in your Docker host, in this example `br0`
+   - The network you are attaching to is in the 192.168.1.0/24 subnet.
 Make sure you assign IP addresses that are outside the router's DHCP range to avoid conflicts. In this example your container will be addressable in the LAN at 192.168.1.25
 
 `docker-compose.yml`
@@ -68,19 +68,19 @@ Make sure you assign IP addresses that are outside the router's DHCP range to av
 ```
 version: '3'
 
- services:
-  deluge:
-   container_name: deluge`
-   image: kurankat/deluge
-   restart: always
-   volumes:
-    - /srv/media/downloads:/downloads
-    - /srv/deluge/config-vpn:/root/.config/deluge
-   environment:
-    - TZ=Australia/Hobart
-   networks:
-   example.lan:
-     ipv4_address: 192.168.1.25
+services:
+ deluge:
+  container_name: deluge
+  image: kurankat/deluge
+  restart: always
+  volumes:
+   - /srv/media/downloads:/downloads
+   - /srv/deluge/config-vpn:/root/.config/deluge
+  environment:
+   - TZ=Australia/Hobart
+  networks:
+  example.lan:
+   ipv4_address: 192.168.1.25
 
 networks:
  example.lan:
