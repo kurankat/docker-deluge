@@ -61,6 +61,7 @@ Start your container by running `docker-compose up -d`.
 Your deluge container will run in a macvlan network, through a pre-configured bridge on the host, and attach directly to the router with its own IP address. The example below assumes that you have:
    - Pre-configured a bridge in your Docker host, in this example `br0`
    - The network you are attaching to is in the 192.168.1.0/24 subnet.
+   
 Make sure you assign IP addresses that are outside the router's DHCP range to avoid conflicts. In this example your container will be addressable in the LAN at 192.168.1.25
 
 `docker-compose.yml`
