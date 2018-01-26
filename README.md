@@ -46,8 +46,6 @@ services:
   volumes:
    - ./downloads:/downloads
    - ./config:/root/.config/deluge
-  environment:
-   - TZ=<YOUR TIMEZONE>
   ports:
    - "8112:8112"
    - "58846:58846"
