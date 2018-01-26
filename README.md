@@ -15,8 +15,8 @@ Run a container with:
 
 ```
 docker run -d --name deluge \
-   -v /Users/MFS/docker/dockerfiles/deluge/vol1:/downloads \
-   -v /Users/MFS/docker/dockerfiles/deluge/vol2:/root/.config/deluge \
+   -v /path/to/your/chosen/folder/downloads:/downloads \
+   -v /path/to/your/chosen/folder/config:/root/.config/deluge \
    -p 8112:8112 \
    kurankat/deluge
 ```
@@ -75,13 +75,11 @@ services:
   image: kurankat/deluge
   restart: always
   volumes:
-   - /srv/media/downloads:/downloads
-   - /srv/deluge/config-vpn:/root/.config/deluge
-  environment:
-   - TZ=Australia/Hobart
+   - ./downloads:/downloads
+   - ./config:/root/.config/deluge
   networks:
   example.lan:
-   ipv4_address: 192.168.1.25
+   ipv4_address: <YOUR.CHOSEN.IP.ADDRESS>
 
 networks:
  example.lan:
@@ -90,5 +88,5 @@ networks:
    parent: br0
   ipam:
    config:
-    - subnet: 192.168.1.0/24
+    - subnet: <YOUR.CHOSEN.IP.SUBNET>/24
 ```
