@@ -1,7 +1,7 @@
 # docker-deluge
 Docker container to run [Deluge](http://deluge-torrent.org/) and web client in Ubuntu 16.04
 
-Experimental image. `deluged` and `deluge-web` run as `root`. Much safer to run behind NAT.
+Experimental image. `deluged` and `deluge-web` run as uid 1000.
 
 # Installation:
 
@@ -11,12 +11,14 @@ Download the image with:
 docker pull kurankat/deluge
 ```
 
+Create a folder for your downloads and another for your config, owned by your uid=1000 user.
+
 Run a container with:
 
 ```
 docker run -d --name deluge \
    -v /path/to/your/chosen/folder/downloads:/downloads \
-   -v /path/to/your/chosen/folder/config:/root/.config/deluge \
+   -v /path/to/your/chosen/folder/config:/home/user/.config/deluge \
    -p 8112:8112 \
    kurankat/deluge
 ```
@@ -45,7 +47,7 @@ services:
   restart: always
   volumes:
    - ./downloads:/downloads
-   - ./config:/root/.config/deluge
+   - ./config:/home/user/.config/deluge
   ports:
    - "8112:8112"
    - "58846:58846"
@@ -72,7 +74,7 @@ services:
   restart: always
   volumes:
    - ./downloads:/downloads
-   - ./config:/root/.config/deluge
+   - ./config:/home/user/.config/deluge
   networks:
   example.lan:
    ipv4_address: <YOUR.CHOSEN.IP.ADDRESS>
